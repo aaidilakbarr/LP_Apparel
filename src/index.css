@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+:root {
+  --font-condensed: "Barlow Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-brand-orange: #f15a24;
+  --color-brand-orange-hover: #ff6f3b;
+  --color-pitch: #0a2419;
+  --color-pitch-deep: #051610;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-canvas: #f8faf9;
+  --color-surface: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.drawer-open {
+  overflow: hidden;
+}
+
+button, input {
+  font-family: inherit;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom Typography Utility */
+.font-condensed {
+  font-family: var(--font-condensed);
+}
+
+/* Hide scrollbar for clean carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1.5rem;
+  z-index: 100;
+  padding: 0.6rem 1.2rem;
+  background: var(--color-ink);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 9999px;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Glassmorphism pill */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+/* Scrim Gradient for Hero */
+.hero-gradient-scrim {
+  background: linear-gradient(90deg, rgba(5, 22, 14, 0.96) 0%, rgba(5, 22, 14, 0.85) 45%, rgba(5, 22, 14, 0.35) 75%, rgba(5, 22, 14, 0.05) 100%);
+}
+
+@media (max-width: 768px) {
+  .hero-gradient-scrim {
+    background: linear-gradient(180deg, rgba(5, 22, 14, 0.5) 0%, rgba(5, 22, 14, 0.85) 40%, rgba(5, 22, 14, 0.98) 75%);
+  }
+}
+
+/* Atlas Jersey Texture Cutout */
+.atlas-thumb {
+  background-image: url('/assets/jersey-atlas.png');
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  background-color: #f1efe9;
+}
+
+/* Floating shadow styles */
+.floating-shadow {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+}
+
+.floating-shadow-lg {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+}
+
+/* Page Transitions & Micro-Animations */
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: pageEnter 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeSlideUp 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Heart Pop Micro-Animation */
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35) rotate(-8deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.heart-pop-active {
+  animation: heartPop 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Badge Pulse / Bounce */
+@keyframes badgeBounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.32);
+  }
+  75% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.badge-pop {
+  animation: badgeBounce 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Button Shimmer Sweep Effect */
+@keyframes sweepShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.btn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-150%);
+  pointer-events: none;
+}
+
+.btn-sweep:hover::after {
+  animation: sweepShine 600ms ease-in-out;
+}
+
+/* Backdrop Fade In */
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.backdrop-fade-in {
+  animation: backdropFade 200ms ease-out forwards;
+}
+
+/* Drawer Animation */
+@keyframes slideDrawerIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.cart-drawer-enter {
+  animation: slideDrawerIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Toast */
+.toast-notice {
+  position: fixed;
+  z-index: 90;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translate(-50%, 160%);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-notice.show {
+  transform: translate(-50%, 0);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
